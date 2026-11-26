@@ -14,6 +14,7 @@ class Game
 
   def play
     guesses = 7
+    wrong_letters = []
     @board.render
     while @board.board.include?('_')
       if guesses == 0
@@ -24,9 +25,16 @@ class Game
       if @board.secret_array.include?(guess_letter)
         puts 'You guessed right.'
         @board.add_letter(guess_letter)
+        unless wrong_letters.empty?
+          print 'Wrong letters you used are:'
+          p wrong_letters
+        end
       else
         guesses -= 1
-        puts "#{guesses} left."
+        wrong_letters.push(guess_letter)
+        puts "The word doesn't include such letter. #{guesses} guesses left."
+        print 'Wrong letters you used are:'
+        p wrong_letters
       end
       @board.render
     end

@@ -4,14 +4,13 @@ class Board
   def initialize
     secret_word = choose_word
     @secret_array = secret_word.split('')
-    p @secret_array
     @board = create_board
   end
 
   def create_board
-    board = []
-    secret_array.size.times { board.push('_') }
-    board
+    board_array = []
+    secret_array.size.times { board_array.push('_') }
+    board_array
   end
 
   def choose_word
@@ -37,9 +36,13 @@ class Board
   end
 
   def render
-    puts '===Hangman==='
-    @board.each { |place| print place + ' ' }
     puts
+    puts '===Hangman==='
+    print ' '
+    @board.size.times { print '__' }
+    print "\n|"
+    @board.each { |place| print place + ' ' }
+    puts '|'
   end
 
   private
